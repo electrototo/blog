@@ -1,3 +1,8 @@
-{{ range .Pages.Limit 3 }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-{{ end }}
+<h2>Latest from the blog</h2>
+<div>
+    {{ range .Site.RegularPages.ByPublishDate }}
+        <h3 class="post-title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+        <small class="post-date-and-author">By {{ .Params.author.name }} | {{ .PublishDate | time.Format ":date_medium" }}</small>
+        <p>{{ .Description }}</p>
+    {{ end }}
+</div>

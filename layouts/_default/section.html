@@ -2,6 +2,8 @@
     <h1>{{ .Title }}</h1>
     {{ .Content }}
     {{ range .Pages }}
-        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+        <h2 class="post-title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+        <small class="post-date-and-author">By {{ .Params.author.name }} | {{ .PublishDate | time.Format ":date_medium" }}</small>
+        <p>{{ .Description }}</p>
     {{ end }}
 {{ end }}

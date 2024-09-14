@@ -1,5 +1,6 @@
 +++
 title = 'cristobal liendo blog'
+description = "Cristobal's blog about technology, software development, cloud computing, DevOps, and random projects."
 date = 2024-09-13T16:58:54-07:00
 draft = true
 +++

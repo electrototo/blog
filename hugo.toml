@@ -11,7 +11,3 @@ enableRobotsTXT = true
         name = 'Blog'
         pageRef = '/blog/'
         weight = 20
-    [[menus.main]]
-        name = 'About me'
-        pageRef = '/about-me'
-        weight = 30

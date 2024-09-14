@@ -1,5 +1,6 @@
 +++
 title = 'Custom AWS Lambda Runtime Environments'
+description = 'How to create a custom environment on AWS Lambda using simple scripting techniques.'
 date = 2024-09-14T09:51:32-07:00
 draft = true
 categories = ["AWS"]

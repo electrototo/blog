@@ -1,9 +1,5 @@
 {{ define "main" }}
     <h1>{{ .Site.Title }}</h1>
     {{ .Content }}
-    {{ range .Site.RegularPages }}
-        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ end }}
-
     {{ partial "latest_posts.html" . }}
 {{ end }}

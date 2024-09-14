@@ -1,2 +1,2 @@
 <h1 id="post-title" class="post-title">{{ .Title }}</h1>
-<p class="post-date-and-author">{{ .Date | time.Format ":date_medium" }} by {{ .Params.author.name }}</p>
+<p class="post-date-and-author">By {{ .Params.author.name }} | on {{ .Date | time.Format ":date_medium" }}</p>
