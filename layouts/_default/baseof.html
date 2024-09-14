@@ -37,9 +37,13 @@
         body {
             background-color: var(--color-surface-100); 
         }
-        main {
+        main, header {
             max-width: 900px;
             margin: auto;
+        }
+        header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
         }
         * {
             color: whitesmoke;
@@ -52,7 +56,9 @@
 
         nav > ul > li {
             float: left;
-            padding: 1rem;
+            padding-right: 1rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
         }
 
         nav > ul > li > a.active {
@@ -62,6 +68,7 @@
         nav > ul > li > a:hover {
             font-weight: bold;
             background-color: white;
+            padding: 0.5rem;
             color: var(--color-surface-100);
         }
 
@@ -77,7 +84,7 @@
     <header>
         {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
     </header>
-    <main>
+    <main id="main">
         {{ block "main" . }}{{ end }}
     </main>
     <footer>
