@@ -6,27 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
+        :root {
+          /** CSS DARK THEME PRIMARY COLORS */
+          --color-primary-100:  #f02b2b;
+          --color-primary-200:  #f64f40;
+          --color-primary-300:  #fc6956;
+          --color-primary-400:  #ff816d;
+          --color-primary-500:  #ff9784;
+          --color-primary-600:  #ffad9b;
+          
+          /** CSS DARK THEME SURFACE COLORS */
+          --color-surface-100:  #1a1a1a;
+          --color-surface-200:  #282828;
+          --color-surface-300:  #3f3f3f;
+          --color-surface-400:  #575757;
+          --color-surface-500:  #717171;
+          --color-surface-600:  #8b8b8b;
+
+          /** CSS DARK THEME MIXED SURFACE COLORS */
+          --color-surface-mixed-100:  #271815;
+          --color-surface-mixed-200:  #3c2d2a;
+          --color-surface-mixed-300:  #524441;
+          --color-surface-mixed-400:  #685c59;
+          --color-surface-mixed-500:  #807572;
+          --color-surface-mixed-600:  #988f8d;
+        }
+
         body {
-            background-color: #121212; 
+            background-color: var(--color-surface-100); 
         }
         main {
             max-width: 900px;
             margin: auto;
         }
-        p, h1 {
+        * {
             color: whitesmoke;
-            font-family: "Inconsolata", monospace;
+            font-family: "Montserrat", sans-serif;
         }
         p {
             line-height: 1.6;
             font-weight: 400;
         }
+
+        nav > ul > li {
+            float: left;
+            padding: 1rem;
+        }
+
+        nav > ul > li > a.active {
+            font-weight: bold;
+        }
+
+        nav > ul > li > a:hover {
+            font-weight: bold;
+            background-color: white;
+            color: var(--color-surface-100);
+        }
+
+        nav > ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
     <header>
+        {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
     </header>
     <main>
         {{ block "main" . }}{{ end }}
