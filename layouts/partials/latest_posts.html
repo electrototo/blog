@@ -1,0 +1,3 @@
+{{ range .Pages.Limit 3 }}
+    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+{{ end }}

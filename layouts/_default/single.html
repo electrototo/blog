@@ -1,0 +1,15 @@
+{{ define "head" }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/a11y-dark.min.css">
+{{ end }}
+
+{{ define "main" }}
+    {{ partial "post_header.html" . }}
+    <div class="single">
+        {{ .Content }}
+    </div>
+{{ end }}
+
+{{ define "bottom" }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+{{ end }}

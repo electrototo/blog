@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>{{ if .Page.Title }}{{ .Page.Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    {{ block "head" . }}{{ end }}
     <style>
         :root {
           /** CSS DARK THEME PRIMARY COLORS */
@@ -14,8 +16,8 @@
           --color-primary-200:  #f64f40;
           --color-primary-300:  #fc6956;
           --color-primary-400:  #ff816d;
-          --color-primary-500:  #ff9784;
-          --color-primary-600:  #ffad9b;
+          --color-primary-500:  #e8cb6f;
+          --color-primary-600:  #f9cf46;
           
           /** CSS DARK THEME SURFACE COLORS */
           --color-surface-100:  #1a1a1a;
@@ -32,6 +34,10 @@
           --color-surface-mixed-400:  #685c59;
           --color-surface-mixed-500:  #807572;
           --color-surface-mixed-600:  #988f8d;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -61,15 +67,21 @@
             padding-bottom: 1rem;
         }
 
-        nav > ul > li > a.active {
-            font-weight: bold;
+        nav a {
+            text-decoration: none;
         }
 
-        nav > ul > li > a:hover {
+        nav a:hover {
             font-weight: bold;
             background-color: white;
             padding: 0.5rem;
             color: var(--color-surface-100);
+        }
+
+        nav a.active {
+            font-weight: bold;
+            text-decoration: underline;
+            color: var(--color-primary-600);
         }
 
         nav > ul {
@@ -77,6 +89,38 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
+        }
+        
+        main h2>a {
+            color: white;
+        }
+
+        main a {
+            text-decoration: none;
+            color: var(--color-primary-600);
+        }
+
+        main a:hover {
+            color: var(--color-primary-600);
+        }
+
+        .post-title {
+            margin-bottom: 0;
+        }
+
+        .post-date-and-author {
+            margin-top: 0;
+        }
+
+        .post-heading a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .post-heading a:hover::before {
+            content: "# ";
+            font-weight: 600;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -89,5 +133,6 @@
     </main>
     <footer>
     </footer>
+    {{ block "bottom" . }}{{ end }}
 </body>
 </html>
