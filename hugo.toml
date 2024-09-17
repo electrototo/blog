@@ -2,6 +2,7 @@ baseURL = 'https://cristobal.liendo.net'
 languageCode = 'en-us'
 title = 'Cristobal Liendo'
 enableRobotsTXT = true
+uglyURLs = true
 [menus]
     [[menus.main]]
         name = 'Home'
