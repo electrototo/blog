@@ -1,0 +1,121 @@
+
+:root {
+    /** CSS DARK THEME PRIMARY COLORS */
+    --color-primary-100:  #f02b2b;
+    --color-primary-200:  #f64f40;
+    --color-primary-300:  #fc6956;
+    --color-primary-400:  #ff816d;
+    --color-primary-500:  #e8cb6f;
+    --color-primary-600:  #f9cf46;
+    
+    /** CSS DARK THEME SURFACE COLORS */
+    --color-surface-100:  #1a1a1a;
+    --color-surface-200:  #282828;
+    --color-surface-300:  #3f3f3f;
+    --color-surface-400:  #575757;
+    --color-surface-500:  #717171;
+    --color-surface-600:  #8b8b8b;
+
+    /** CSS DARK THEME MIXED SURFACE COLORS */
+    --color-surface-mixed-100:  #271815;
+    --color-surface-mixed-200:  #3c2d2a;
+    --color-surface-mixed-300:  #524441;
+    --color-surface-mixed-400:  #685c59;
+    --color-surface-mixed-500:  #807572;
+    --color-surface-mixed-600:  #988f8d;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-surface-100); 
+}
+main, header {
+    max-width: 900px;
+    margin: auto;
+}
+header {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+* {
+    color: whitesmoke;
+    font-family: "Montserrat", sans-serif;
+}
+p {
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+nav > ul > li {
+    float: left;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav a:hover {
+    font-weight: bold;
+    background-color: white;
+    padding: 0.5rem;
+    color: var(--color-surface-100);
+}
+
+nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: var(--color-primary-600);
+}
+
+nav > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+main h2>a {
+    color: white;
+}
+
+main h3>a:hover {
+    text-decoration: underline;
+}
+
+main a {
+    text-decoration: none;
+    color: var(--color-primary-600);
+}
+
+main a:hover {
+    color: var(--color-primary-600);
+}
+
+.post-title {
+    margin-bottom: 0;
+}
+
+.post-date-and-author {
+    margin-top: 0;
+}
+
+.post-heading a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.post-heading a:hover::before {
+    content: "# ";
+    font-weight: 600;
+    text-decoration: none;
+}
+
+main li {
+    line-height: 1.6rem;
+}
