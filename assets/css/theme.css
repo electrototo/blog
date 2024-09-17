@@ -119,3 +119,7 @@ main a:hover {
 main li {
     line-height: 1.6rem;
 }
+
+.table-container {
+    overflow-x: auto;
+}
