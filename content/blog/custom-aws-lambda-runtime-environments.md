@@ -13,17 +13,11 @@ tags = ["Lambda"]
 
 _Foreword: This blog post is based on the [AWS Documentation](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html) for custom Lambda environments._
 
-On the last couple of months I have been working extensively with Lambda on different project which have involved reducing code bundle sizes so we are able to deploy code under the 250 MB limit imposed by Lambda, doing integration with other AWS services such as API Gateway, creation of a custom [lambda authorizer](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html) which performs custom authentication and authorization, and [A/B testing using a lambda@edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-examples.html#lambda-examples-a-b-testing) deployed on a CloudFront distribution.
+On the last couple of months I have been working extensively with Lambda on different projects which have involved reducing code bundle sizes so we are able to deploy code under the 250 MB limit imposed by Lambda, doing integration with other AWS services such as API Gateway, creation of a custom [lambda authorizer](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html) which performs custom authentication and authorization, and [A/B testing using a lambda@edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-examples.html#lambda-examples-a-b-testing) deployed on a CloudFront distribution.
 
 Because of this, I have spent a lot of time reading the documentation of AWS and found out a couple of things that have grabbed my attention, principally [OS-only runtimes](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-provided.html) environments.
 
 In this blog post I want to explain how to create a simple bash script that echoes back the event received by lambda, which can be later modified to run [any executable]({{< ref "serverless-prometheus-blackbox-exporter-1.md" >}}) you can think of.
-
-
-## About AWS Lambda
-AWS Lambda is a _serverless_ [^1] runtime environment that AWS provides its customers to run your application code in the cloud, without the need to worry about provisioning a server or giving major thoughts about rightsizing the hardware specifications so your code is able to run optimally and able to scale as much as you want.
-
-As a managed environment, AWS has a list of [supported runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) that your code can use. For example, at the time of writing of this article, AWS Lambda has support for Node.js 18 but with a deprecation date of July 31, 2025. This means that you can create applications that make use of Node.js 18 until the runtime is deprecated. After a runtime is deprecated, as a developer, you will need to worry about doing the appropriate upgrades to the next supported version of the runtime, otherwise you will not be able to create **nor** update your code, which can be scary if you have a product used by many customers!
 
 ## Custom environments
 Custom environments allow you to run any piece of code that is not under the supported runtimes of AWS Lambda. This comes handy when you want to run compiled programs such as Rust, Go, or C++ on Lambda, or when you want to create a wrapper on an existing binary; which I will be talking about in my next blog post [Serverless Prometheus BlackBox Exporter]({{< ref "serverless-prometheus-blackbox-exporter-1.md" >}}).
