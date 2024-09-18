@@ -21,14 +21,25 @@
     {{ block "head" . }}{{ end }}
 </head>
 <body>
-    <header>
-        {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
-    </header>
-    <main id="main">
-        {{ block "main" . }}{{ end }}
-    </main>
-    <footer>
-    </footer>
-    {{ block "bottom" . }}{{ end }}
+    <div class="wrapper">
+        <header>
+            {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+        </header>
+        <main id="main">
+            {{ block "main" . }}{{ end }}
+        </main>
+        <footer>
+            <p class="nav-title">
+                <a href="/">
+                    > cli
+                </a>
+            </p>
+            <a class="github" href="https://github.com/electrototo" target="_blank" rel="external noreferrer">
+                <image height="24" src="/svg/github-mark-white.svg" alt="Link to my GitHub"/>
+            </a> 
+            <small>&copy {{ time.Now.Year }}, Cristobal Liendo. All rights reserved.</small>
+        </footer>
+        {{ block "bottom" . }}{{ end }}
+    </div>
 </body>
 </html>
