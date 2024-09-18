@@ -101,6 +101,14 @@ main a:hover {
     margin-bottom: 0;
 }
 
+.post-title a {
+    color: var(--color-primary-600);
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
 .post-date-and-author {
     margin-top: 0;
 }
@@ -127,4 +135,15 @@ main li {
 code, code * {
     font-family: monospace;
     font-size: 0.8rem;
+}
+
+.post-list-item-overview {
+    background-color: black;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+}
+
+.post-list-item-overview > h2, .post-list-item-overview > h3 {
+    margin-top: 0px;
 }
