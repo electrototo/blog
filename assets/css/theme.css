@@ -67,10 +67,14 @@ nav a:hover {
     color: var(--color-surface-100);
 }
 
-nav a.active {
+nav a.active:not(nav a:hover) {
     font-weight: bold;
     text-decoration: underline;
     color: var(--color-primary-600);
+}
+
+nav a.active:hover {
+    text-decoration: underline;
 }
 
 nav > ul {
