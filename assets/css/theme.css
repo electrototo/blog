@@ -210,3 +210,12 @@ footer {
 .github {
     margin-bottom: 1rem;
 }
+
+table, table td, table th {
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-surface-200);
+}
