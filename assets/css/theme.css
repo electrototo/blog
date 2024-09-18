@@ -123,3 +123,8 @@ main li {
 .table-container {
     overflow-x: auto;
 }
+
+code, code * {
+    font-family: monospace;
+    font-size: 0.8rem;
+}
