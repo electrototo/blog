@@ -147,3 +147,8 @@ code, code * {
 .post-list-item-overview > h2, .post-list-item-overview > h3 {
     margin-top: 0px;
 }
+
+.nav-title a {
+    font-family: monospace;
+    font-size: 1.1rem;
+}

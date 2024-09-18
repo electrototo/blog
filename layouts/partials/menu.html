@@ -4,6 +4,7 @@
 {{- with index site.Menus $menuID }}
     <nav>
         <ul>
+            <li class="nav-title"><a href="/">> cli</a></li>
             {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         </ul>
         <hr />
