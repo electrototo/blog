@@ -13,6 +13,7 @@
 
     <meta property="og:title" content="{{ $pageTitle }}" />
     <meta property="og:description" content="{{ .Description }}" />
+    <meta property="og:image" content="{{ relURL "/images/opengraph/cli.png" }}" />
 
     {{ $css := resources.Get "css/theme.css" }}
     {{ $style := $css | resources.Minify }}
