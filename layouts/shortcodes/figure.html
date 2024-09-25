@@ -23,17 +23,17 @@
   ><!-- Closing img tag -->
   {{- if .Get "link" }}</a>{{ end -}}
   {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
-    <figcaption>
+    <figcaption style="text-align: center;">
       {{ with (.Get "title") -}}
         <h4>{{ . }}</h4>
       {{- end -}}
-      {{- if or (.Get "caption") (.Get "attr") -}}<p>
+      {{- if or (.Get "caption") (.Get "attr") -}}<small>
         {{- .Get "caption" | markdownify -}}
         {{- with .Get "attrlink" }}
           <a href="{{ . }}">
         {{- end -}}
         {{- .Get "attr" | markdownify -}}
-        {{- if .Get "attrlink" }}</a>{{ end }}</p>
+        {{- if .Get "attrlink" }}</a>{{ end }}</small>
       {{- end }}
     </figcaption>
   {{- end }}

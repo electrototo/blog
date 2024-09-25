@@ -282,9 +282,11 @@ probe_success 1
 ```
 
 ### Prometheus and Grafana integration
-After hooking the blackbox expoter with prometheus and grafana, and sraping the results from the blackbox exporter for a while, I can obtain metrics about the latency of my website, as if users located in the North West of United States were accessing my blog[^2]. 
+After hooking the blackbox expoter with prometheus and grafana, and scraping the results from the blackbox exporter for a while, I can obtain metrics about the latency of my website, as if users located in the North West of United States were accessing my blog[^2]. 
 
-{{< figure src="images/test.png" width="100%" >}}
+{{< figure src="images/grafana.png" width="100%" caption="Visualization on Grafana" >}}
+
+## Closing thoughts
 
 [^1]: If you want to learn more about custom AWS Lambda Runtime Environments, feel free to read my [previous blog post]({{< ref "custom-aws-lambda-runtime-environments" >}})!
 [^2]: This is not 100% accurate, as I am hosting both the blackbox exporter and my blog within AWS. The request from the blackbox to my blog would not need to leave the AWS network,
