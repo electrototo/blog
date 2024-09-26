@@ -1,6 +1,6 @@
 <h2>Latest from the blog</h2>
 <div>
-    {{ range .Site.RegularPages.ByPublishDate }}
+    {{ range .Site.RegularPages.ByPublishDate.Reverse }}
         <div class="post-list-item-overview">
             <h3 class="post-title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
             <small class="post-date-and-author">By {{ .Params.author.name }} | {{ .PublishDate | time.Format ":date_medium" }}</small>
