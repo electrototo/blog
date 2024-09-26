@@ -1,8 +1,8 @@
 +++
 title = 'Serverless Prometheus Blackbox Exporter pt 1'
 description = 'Porting prometheus blackbox exporter to an AWS lambda using custom lambda environments, and a little bit of source code modification.'
-date = 2024-09-14T15:02:32-07:00
-draft = true
+date = 2024-09-25T15:02:32-07:00
+draft = false
 tags = ["Lambda"]
 categories = ["Observability"]
 [params]
@@ -183,10 +183,11 @@ do
     EVENT_DATA=$(curl -sS -LD "$HEADERS" "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next")
 
     # 2. Parse the event, retrieving the url to be probed
-    TARGET=$(echo "$EVENT_DATA" | grep -o '"body":"[^"]*' | grep -o '[^"]*$' | base64 --decode)
+    RAW_PATH=$(echo "$EVENT_DATA" | grep -o '"rawPath":"[^"]*' | grep -o '[^"]*$')
+    QUERY_PARAMS=$(echo "$EVENT_DATA" | grep -o '"rawQueryString":"[^"]*' | grep -o '[^"]*$')
 
     # 3. Retrieve the response from blackbox exporter
-    RESPONSE=$(curl "localhost:9115/probe?target=$TARGET&module=http_2xx")
+    RESPONSE=$(curl "localhost:9115$RAW_PATH?$QUERY_PARAMS")
 
     # 4. From the file, get the request ID, so we are able to successfully comunicate the response
     REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
@@ -234,7 +235,7 @@ arn:aws:cloudformation:us-west-2:1122334455:stack/AwsLambdaBlackboxExporterStack
 ## Results
 Using the endpoint that was obtained after the deployment, we can make a simple HTTP request using cURL to request the latency metrics for any endpoint; for example my blog:
 ```
-$ curl -X POST -d 'cristobal.liendo.net' https://abcdefghijlkmnopqrstuvwxyz.lambda-url.us-west-2.on.aws/
+$ curl 'https://abcdefghijlkmnopqrstuvwxyz.lambda-url.us-west-2.on.aws/probe?target=cristobal.liendo.net&module=http_2xx'
 
 # HELP probe_dns_lookup_time_seconds Returns the time taken for probe dns lookup in seconds
 # TYPE probe_dns_lookup_time_seconds gauge
@@ -287,6 +288,28 @@ After hooking the blackbox expoter with prometheus and grafana, and scraping the
 {{< figure src="images/grafana.png" width="100%" caption="Visualization on Grafana" >}}
 
 ## Closing thoughts
+The initial results look very promising. Even though the blackbox exporter is currently deployed in a single AWS region (us-west-2), we can deploy it in any available AWS region that
+your AWS account has access to; in fact, I will be talking about this in another blog post.
+
+### Optimizations
+One thing that would be interesting to explore is the [initialization]({{< ref "#blackbox-exporter-wrapper" >}} "aa") of the blackbox exporter process. Right now we are waiting for 100ms, assuming
+that the process will initialize in time. We could pipe the output of the process somewhere, and wait until we read from the output that the server started successfully.
+
+### Pricing
+Doing some estimates about how much I would be paying, if I constantly probe the blackbox exporter lambda, I ended up with the following results using the [lambda pricing](https://aws.amazon.com/lambda/pricing/) for us-west-2:
+* Scraping 1 time every 15 seconds, equals to 4 invocations per minute * 60 minutes * 24 hours * 31 days = 178,560 invocations per month.
+* Assuming an average execution duration of 300ms * 178,560 invocations = 53,568 seconds.
+* The lambda has 128MB of memory configured = 0.125GB
+* GB-second per month = 0.125GB * 53,568 seconds = 6,696 GB-seconds
+
+Price just because we are invoking the lambda: ($0.20 / 1,000,000 invocations) * 178,560 invocations per month = **$0.035712 USD**
+
+Price due to memory configuration: 6,696 GB-seconds * $0.0000166667 for every GB-second = **$0.111555 USD**
+
+Grand total: **$0.1472 per month**
+
+Even if I were to host this on a Raspberry PI, I would need to make a request every 15 seconds for 15 years to justify moving away from lambda! Isn't that amazing?
+
 
 [^1]: If you want to learn more about custom AWS Lambda Runtime Environments, feel free to read my [previous blog post]({{< ref "custom-aws-lambda-runtime-environments" >}})!
 [^2]: This is not 100% accurate, as I am hosting both the blackbox exporter and my blog within AWS. The request from the blackbox to my blog would not need to leave the AWS network,
