@@ -1,5 +1,5 @@
 +++
-title = 'Serverless Prometheus Blackbox Exporter pt 1'
+title = 'Serverless Prometheus Blackbox Exporter'
 description = 'Porting prometheus blackbox exporter to an AWS lambda using custom lambda environments, and a little bit of source code modification.'
 date = 2024-09-25T15:02:32-07:00
 draft = false
@@ -75,7 +75,7 @@ Keep in mind that these values are perceived from the place where the blackbox e
 ## Porting blackbox exporter to AWS Lambda
 As high-level we need to do two things to port blackbox exporter to Lambda, which basically will merge into a single file:
 1. Use a custom AWS Lambda Runtime Environment [^1] in which the blackbox binary will be running.
-2. Create a _wrapper_ between lambda and the blackbox process (aka `cURL`'ing everyting you can).
+2. Create a _wrapper_ between lambda and the blackbox process (aka `cURL`'ing everything you can).
 
 All the code that will be used on this section can be found in my GitHub repository: [aws-lambda-blackbox-exporter](https://github.com/electrototo/aws-lambda-blackbox-exporter).
 
@@ -83,7 +83,7 @@ All the code that will be used on this section can be found in my GitHub reposit
 We will start with a simple lambda that is defined on CDK. For that we have to ensure a couple of things:
 1. The runtime must be Amazon Linux 2, and not a managed environment such as node, or python.
 2. The architecture of the lambda must be x86_64, as the binary we will be downloading will be compiled for that architecture.
-3. We need to find a way (by using CDK's `Code.fromCustomCommad()` method) to bootstrap the environment at synth with the appropriate binaries and lambda entrypoint.
+3. We need to find a way (by using CDK's `Code.fromCustomCommand()` method) to bootstrap the environment at synth with the appropriate binaries and lambda entrypoint.
 
 _[lib/aws-lambda-blackbox-exporter-stack.ts](https://github.com/electrototo/aws-lambda-blackbox-exporter/blob/master/lib/aws-lambda-blackbox-exporter-stack.ts)_
 ```ts
@@ -204,7 +204,7 @@ running on AWS Lambda, being either managed ones or custom ones, the following n
 3. Using the runtime API provided by lambda, the response is sent back to the caller through the response endpoint.
 
 In this implementation the blackbox exporter is forked, and the main process sleeps for 100ms to wait for the blackbox exporter to start. After that the main loop is executed
-obtaining the event from the runtime api, redirecting it to the blackbox exporter, and returning back whatever was the output of the cURL to the blakbox exporter.
+obtaining the event from the runtime api, redirecting it to the blackbox exporter, and returning back whatever was the output of the cURL to the blackbox exporter.
 
 ### Deployment
 After the [aws-lambda-blackbox-exporter](https://github.com/electrototo/aws-lambda-blackbox-exporter) github CDK repo is built, and deployed by executing the following commands:
