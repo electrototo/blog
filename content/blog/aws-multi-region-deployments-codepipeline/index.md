@@ -2,7 +2,7 @@
 title = 'AWS Multi-Region Deployments'
 description = 'Multi-region deployments in AWS using CDK, CodePipeline, GitHub webhooks, and CloudFormation'
 date = 2024-09-30T22:31:58-07:00
-draft = true
+draft = false
 tags = ["cdk", "aws", "lambda", "codepipeline"]
 categories = []
 [params]
